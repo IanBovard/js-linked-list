@@ -82,7 +82,28 @@ function remove(number){
   }
 }
 function insert(value, number){
-
+  let previousNode = get(number-1);
+  let currentNode = get(number);
+  let nextNode = get(number+1);
+  let newNode = {
+    value :value,
+    next : null
+  };
+  if (number === 0){
+    newNode.next = getHead();
+    linkedList = newNode;
+    return linkedList;
+  }else if (currentNode.next === null){
+    newNode.next = currentNode;
+    previousNode.next = newNode;
+  }else if (currentNode){
+    newNode.next = currentNode;
+    currentNode.next = nextNode;
+    previousNode.next = newNode;
+  }else{
+    return false;
+  }
+  return newNode;
 }
 return {
   getHead : getHead,
@@ -93,16 +114,10 @@ return {
   insert : insert
 };
 }
-/*let test = linkedListGenerator();
-console.log("head:",test.getHead());
-console.log("tail: ",test.getTail());
+let test = linkedListGenerator();
 console.log("add: ",test.add('cat'));
-console.log("head: ",test.getHead());
-console.log("tail: ",test.getTail());
 console.log("add: ",test.add('dog'));
-console.log("head: ",test.getHead());
-console.log("tail: ",test.getTail());
 console.log("add: ",test.add('fish'));
-console.log("head: ",test.getHead());
-console.log("tail: ",test.getTail());
-console.log("get: ", test.get());*/
+console.log("get: ",test.get(0).value);
+console.log("insert", test.insert('shiba inu', 0));
+console.log("insert get: ", test.get(0).value);
