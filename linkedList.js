@@ -52,14 +52,34 @@ function get(number){
       currentNode = currentNode.next;
       count++;
     }else{
-  return false;
-}
+      return false;
+    }
   }
-      return currentNode;
+  return currentNode;
 }
 }
 function remove(number){
+  let count = 0;
+  let currentNode = linkedList;
+  let previousNode = linkedList;
 
+  if (number === 0){
+    linkedList = linkedList.next;
+  }else if (number < 0){
+    return false;
+  }else{
+    while (count < number){
+      if (currentNode.next){
+        previousNode = currentNode;
+        currentNode = currentNode.next;
+        count++;
+      }else{
+        return false;
+      }
+    }
+    previousNode.next = currentNode.next;
+    return currentNode;
+  }
 }
 function insert(value, number){
 
